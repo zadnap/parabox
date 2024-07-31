@@ -1,0 +1,197 @@
+.wrapper-auth {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    background-color: $background-color-2;
+    .process {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        width: 25%;
+        padding: 10px;
+        background-color: $background-color;
+        margin: 10px;
+        border-radius: 5px;
+        .content {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            align-self: center;
+            width: 90%;
+            margin-top: 20px;
+            .item {
+                opacity: 0.4;
+                display: flex;
+                align-items: flex-start;
+                margin-bottom: 20px;
+                i {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    position: relative;
+                    background-color: $background-color-2;
+                    height: 29px;
+                    width: 29px;
+                    padding: 5px;
+                    border-radius: 5px;
+                    border: 1px solid $sub-text-color;
+                }
+                i::after {
+                    content: "";
+                    position: absolute;
+                    top: -30px;
+                    width: 1px;
+                    height: 30px;
+                    background-color: $sub-text-color;
+                }
+                .info {
+                    margin-left: 10px;
+                    overflow-x: hidden;
+                    text-wrap: nowrap;
+                }
+                p {
+                    margin-top: 2px;
+                    font-size: 0.8rem;
+                }
+            }
+            .item:first-child i::after {
+                display: none;
+            }
+            .item.done {
+                opacity: 1;
+                i {
+                    color: $primary-color;
+                    border-color: $primary-color;
+                }
+                i::after {
+                    background-color: $primary-color;
+                }
+                h3 {
+                    color: $primary-color;
+                }
+            }
+        }
+        .nav {
+            align-self: center;
+            width: 90%;
+            display: flex;
+            justify-content: space-between;
+            position: absolute;
+            bottom: 10px;
+            a:hover {
+                color: $primary-color;
+                text-decoration: underline;
+            }
+        }
+    }
+    .auth {
+        width: 75%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 10px;
+        position: relative;
+        form {
+            width: 35%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            h3 {
+                color: $primary-color;
+                font-size: 1.5rem;
+                margin-bottom: 5px;
+            }
+            p {
+                font-size: 0.8rem;
+                margin-bottom: 20px;
+                color: $sub-text-color;
+            }
+            .label {
+                font-size: 0.8rem;
+                margin-bottom: 5px;
+                align-self: flex-start;
+            }
+            .input-box {
+                display: flex;
+                align-items: center;
+                width: 100%;
+                margin-bottom: 10px;
+                border-radius: 5px;
+                background-color: $background-color;
+                padding: 5px 10px;
+                i {
+                    text-align: center;
+                    width: 25px;
+                    color: $primary-color;
+                    background-color: $background-color-2;
+                    border-radius: 5px;
+                    padding: 5px;
+                    margin-right: 5px;
+                }
+                input {
+                    font-size: 0.8rem;
+                    flex-grow: 1;
+                }
+            }
+            #prompt {
+                color: $red;
+                font-size: 0.8rem;
+                align-self: flex-start;
+            }
+            .forgot {
+                width: 100%;
+                margin-bottom: 5px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                font-size: 0.8rem;
+                label {
+                    display: flex;
+                    align-items: center;
+                    gap: 3px;
+                    font-family: "Poppins";
+                    line-height: 0.9;
+                }
+                button {
+                    padding: 0;
+                    background-color: transparent;
+                }
+                a:hover {
+                    text-decoration: underline;
+                }
+            }
+            .submit {
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                padding: 10px;
+                background-color: $primary-color;
+                color: #fff;
+                margin-top: 10px;
+            }
+            .submit:disabled {
+                cursor: auto;
+                background-color: $background-color;
+                color: $sub-text-color;
+            }
+        }
+        .check-process {
+            padding: 0 10px;
+            width: 30%;
+            position: absolute;
+            bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            div {
+                width: calc(50% - 5px);
+                height: 5px;
+                border-radius: 5px;
+                background-color: $background-color;
+            }
+            div.done {
+                background-color: $primary-color;
+            }
+        }
+    }
+}

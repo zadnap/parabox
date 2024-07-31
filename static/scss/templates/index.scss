@@ -1,0 +1,137 @@
+.wrapper-main {
+    padding: 10px;
+    display: flex;
+    background-color: $background-color;
+    height: 100%;
+    nav {
+        position: fixed;
+        z-index: 1;
+        height: 100%;
+        width: 240px;
+        .user {
+            width: 100%;
+            border-radius: 5px;
+            background-color: $background-color-2;
+            margin-bottom: 15px;
+            padding: 10px;
+            .info {
+                display: flex;
+                align-items: center;
+                padding: 10px;
+                background-color: $background-color;
+                border-top-left-radius: 5px;
+                border-top-right-radius: 5px;
+                .names {
+                    flex-grow: 1;
+                    overflow: hidden;
+                }
+                h3 {
+                    text-wrap: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    font-size: 1rem;
+                }
+                p {
+                    font-size: 0.8rem;
+                    text-wrap: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+                img {
+                    height: 35px;
+                    width: 35px;
+                    object-fit: cover;
+                    border-radius: 50%;
+                    margin-right: 10px;
+                }
+            }
+        }
+        ul {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: $background-color-2;
+            li {
+                display: flex;
+                align-items: center;
+                width: 100%;
+                border-radius: 5px;
+                color: $sub-text-color;
+                margin-bottom: 2px;
+            }
+            a {
+                padding: 7px;
+                display: inline-block;
+                height: 100%;
+                width: 100%;
+            }
+            i {
+                width: 35px;
+                text-align: center;
+            }
+            li::after {
+                content: "";
+                color: $background-color-2;
+                background-color: $primary-color;
+                border-radius: 5px;
+                padding: 0 7px;
+            }
+            li:hover {
+                background-color: #ececee;
+            }
+            li.active {
+                color: $background-color-2;
+                background-color: $primary-color;
+            }
+        }
+    }
+    
+    .news {
+        width: calc(100% - 545px);
+        margin-left: 270px;
+        display: flex;
+        flex-direction: column;
+        .create-post {
+            background-color: $background-color-2;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            h3 {
+                padding: 10px;
+            }
+            .create-box {
+                display: flex;
+                align-items: center;
+                border-top: 1px solid $background-color;
+                padding: 10px;
+                button {
+                    font-size: 0.9rem;
+                    justify-content: space-between;
+                    position: relative;
+                    color: $sub-text-color;
+                    text-align: start;
+                    flex-grow: 1;
+                    margin-left: 10px;
+                    background-color: $background-color;
+                    padding: 6px 10px;
+                }
+                button:hover {
+                    background-color: #ececee;
+                } 
+            }
+        }
+        article.post {
+            width: 100%;
+            background-color: $background-color-2;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+        .out-of-content {
+            color: $primary-color;
+            padding: 20px;
+            text-align: center;
+            background-color: $background-color-2;
+            border-radius: 5px;
+        }
+    }   
+}
+

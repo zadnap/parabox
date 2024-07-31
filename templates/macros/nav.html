@@ -1,0 +1,6 @@
+{% macro navBar() %}
+    <ul>
+        <li {% if request.path == '/' %}class="active"{% endif %}><a href="/"><i class="fa-solid fa-house"></i>Feed</a></li>
+        <li {% if request.path == '/marked' %}class="active"{% endif %}><a href="/marked"><i class="fa-solid fa-bookmark"></i>Marked</a></li>
+    </ul>
+{% endmacro %}

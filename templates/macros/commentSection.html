@@ -1,0 +1,35 @@
+{% macro commentSection(data) %}
+    <div class="comment-section hidden">
+        <div class="comments">
+            {% if data.comments|length == 0 %}
+                <div class="no-comment">There is no comment on this post!</div>
+            {% else %}
+                {% for comment in data.comments %}
+                    <div class="user-comment">
+                        <a href="/profile/{{ comment.username }}">
+                            <img 
+                                class="avatar"
+                                src="data:image/jpeg;base64,{{ comment.profile_picture }}" 
+                                alt="{{ comment.first_name }} {{ comment.last_name }}"
+                                onerror="this.src='../../static/images/avatar_placeholder.jpg';"
+                            >
+                        </a>
+                        <div class="info">
+                            <a href="/profile/{{ comment.username }}" class="poppins-medium name">{{ comment.first_name }} {{ comment.last_name }}</a>
+                            <p class="text">{{ comment.content }}</p>
+                            <span class="time">{{ comment.created_at }}</span>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+        <div class="cmt-box">
+            <textarea class="comment-textarea" rows="1" placeholder="Say something less than 2000 characters" maxlength="2000" oninput="editComment(`{{ data.id }}`)"></textarea>
+            <div class="prompt"></div>
+            <div class="handles">
+                <div class="word-count">0/2000</div>
+                <button class="cmt-btn" onclick="sendComment(`{{ data.id }}`)" disabled>Send</button>
+            </div>
+        </div>
+    </div>
+{% endmacro %}

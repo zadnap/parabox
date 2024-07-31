@@ -1,0 +1,58 @@
+{% macro editProfileModal() %}
+    <div class="modal edit-profile-modal hidden">
+        <form action="/edit/profile" class="container" method="post" id="edit_profile_form" enctype="multipart/form-data">
+            <div class="head">
+                <h3 class="poppins-semibold">Edit your profile</h3>
+                <button type="reset" id="close-edit"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="body">
+                <div class="edit-info">
+                    <label class="poppins-medium">Profile picture</label>
+                    <div class="user-picture profile-picture">
+                        <img 
+                            class="avatar" 
+                            src="data:image/jpeg;base64,{{ current_user.profile_picture }}" 
+                            onerror="this.src='../static/images/avatar_placeholder.jpg';"
+                            alt="{{ current_user.first_name }} {{ current_user.last_name}}"
+                            id="avatar-preview"
+                        >
+                        <label for="profile_picture">Change picture</label>
+                        <input type="file" name="profile_picture" id="profile_picture" accept="image/png, image/jpeg">
+                    </div>
+                </div>
+                <div class="edit-info">
+                    <label class="poppins-medium">Wallpaper</label>
+                    <div class="user-picture wallpaper-picture">
+                        <img 
+                            class="wallpaper" 
+                            src="data:image/jpeg;base64,{{ current_user.wallpaper_picture }}" 
+                            onerror="this.src='../static/images/avatar_placeholder.jpg';"
+                            alt="{{ current_user.first_name }} {{ current_user.last_name}}"
+                            id="wallpaper-preview"
+                        >
+                        <label for="wallpaper_picture">Change picture</label>
+                        <input type="file" name="wallpaper_picture" id="wallpaper_picture" accept="image/png, image/jpeg">
+                    </div>
+                </div>
+                <div class="edit-info">
+                    <label class="poppins-medium" for="username_edited">Username</label>
+                    <input type="text" value="{{ current_user.username }}" name="username_edited" id="username_edited" placeholder="{{ current_user.username }}">
+                </div>
+                <div class="edit-info">
+                    <label class="poppins-medium" for="first_name">First name</label>
+                    <input type="text" value="{{ current_user.first_name }}" name="first_name" id="first_name_edited" placeholder="{{ current_user.first_name }}">
+                </div>
+                <div class="edit-info">
+                    <label class="poppins-medium" for="last_name">Last name</label>
+                    <input type="text" value="{{ current_user.last_name }}" name="last_name" id="last_name_edited" placeholder="{{ current_user.last_name }}">
+                </div>
+                <div class="edit-info">
+                    <label class="poppins-medium" for="bio">About me</label>
+                    <textarea spellcheck="false" autocomplete="off" rows="5" name="bio" id="bio_edited" placeholder="No more than 200 words">{{ current_user.bio }}</textarea>
+                </div>
+                <div id="prompt"></div>
+                <button type="submit" class="save">Save changes</button>
+            </div>
+        </form>
+    </div>
+{% endmacro %}

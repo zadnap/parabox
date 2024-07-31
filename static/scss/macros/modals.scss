@@ -1,0 +1,172 @@
+.modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    z-index: 3;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.212);
+    animation: fadeIn ease 0.3s;
+    .container {
+        display: flex;
+        flex-direction: column;
+        background-color: $background-color-2;
+        border-radius: 5px;
+        margin: 30px;
+        font-size: 0.8rem;
+        animation: zoomIn ease 0.3s;
+        .head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid $background-color;
+            padding: 10px;
+            .info {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                overflow: hidden;
+                h3 {
+                    font-size: 0.9rem;
+                    text-wrap: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+                p {
+                    color: $sub-text-color;
+                    font-size: 0.8rem;
+                    text-wrap: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+            }
+            button {
+                padding: 5px 7px;
+            }
+            button:hover {
+                background-color: $background-color;
+            }
+        }
+        .body {
+            display: flex;
+            flex-direction: column;
+            padding: 10px;
+            overflow-y: auto;
+        }
+    }
+}
+.modal.hidden {
+    display: none;
+}
+
+.create-modal {
+    form {
+        display: flex;
+        flex-direction: column;
+        width: 40%;
+        max-height: 70%;
+        .body {
+            overflow-y: auto;
+        }
+        .text {
+            display: flex;
+            flex-direction: column;
+            textarea {
+                width: 100%;
+                font-size: 0.9rem;
+                padding: 10px;
+                border-radius: 5px;
+                background-color: $background-color;
+            }
+            .count {
+                align-self: self-end;
+                margin: 10px 5px 10px 0;
+                color: $sub-text-color;
+                align-self: self-end;
+            }
+        }
+        .images {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin-top: 10px;
+            .image {
+                position: relative;
+                width: calc(50% - 5px);
+                margin-bottom: 7px;
+            }
+            .image:hover {
+                img {
+                    border-color: $sub-text-color;
+                }
+                button {
+                    display: block;
+                }
+            }
+            img {
+                height: 150px;
+                width: 100%;
+                object-fit: cover;
+                border-radius: 5px;
+                border: 1px solid transparent;
+            }
+            button {
+                display: none;
+                position: absolute;
+                bottom: 10px;
+                right: 10px;
+                padding: 5px;
+                color: $sub-text-color;
+                background-color: transparent;
+            }
+            button:hover {
+                color: $text-color;
+            }
+        }
+        .posting-prompt {
+            color: $red;
+            margin-bottom: 10px;
+        }
+        .handles {
+            display: flex;
+            flex-wrap: wrap;
+            button, label {
+                margin-right: 5px;
+                color: $sub-text-color;
+                padding: 5px 10px;
+                margin-bottom: 5px;
+            }
+            input {
+                display: none;
+            }
+            label {
+                display: flex;
+                align-items: center;
+                border-radius: 5px;
+            }
+            label:hover {
+                background-color: #ececee;
+            }
+            i {
+                margin-right: 7px;
+            }
+        }
+        .share {
+            margin-top: 10px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            background-color: $primary-color;
+            color: $background-color-2;
+            padding: 10px;
+        }
+        .share:disabled {
+            cursor: auto;
+            background-color: $background-color;
+            color: $sub-text-color;
+        }
+    }
+}

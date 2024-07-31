@@ -1,0 +1,59 @@
+{% from "macros/post.html" import post with context %}
+{% from "macros/editProfileModal.html" import editProfileModal with context %}
+
+{% extends "layout.html" %}
+{% block title %}{{ user.first_name + ' ' + user.last_name }}{% endblock %}
+
+{% block body %}
+    <div class="wrapper-profile">
+        <div class="profile-head">
+            <div class="images">
+                <img 
+                    class="wallpaper"
+                    src="data:image/jpeg;base64,{{ user.wallpaper_picture }}" 
+                    alt="{{ user.first_name }} {{ user.last_name }}"
+                    onerror="this.src='../static/images/avatar_placeholder.jpg';"
+                >   
+                <img 
+                    class="avatar"
+                    src="data:image/jpeg;base64,{{ user.profile_picture }}" 
+                    alt="{{ user.first_name }} {{ user.last_name }}"
+                    onerror="this.src='../static/images/avatar_placeholder.jpg';"
+                >
+            </div>
+            <div class="info">
+                <div class="user-info">
+                    <h3 class="poppins-medium">{{ user.first_name }} {{ user.last_name }}</h3>
+                    <p>@{{ user.username }}</p>
+                </div>
+                <div class="handles">
+                    {% if user.id == current_user.id|int %}
+                        <button type="button" onclick="handleEditProfile()">Edit my profile</button>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="profile-body">
+            <div class="introduction">
+                <div class="bio">
+                    <h3 class="poppins-semibold">About me</h3>
+                    <p>{{ user.bio }}</p>
+                </div>
+            </div>
+            <div class="posts">
+                {% for data in posts %}
+                    {{ post(data) }}
+                {% endfor %}
+            </div>
+        </div>
+        {% if current_user.id|int == user.id %}
+            {{ editProfileModal() }}
+        {% endif %} 
+    </div>
+{% endblock %}
+
+{% block script %}
+    {% if current_user.id|int == user.id %}
+        <script src="../../static/js/profile/myProfile.js"></script>
+    {% endif %}
+{% endblock %}

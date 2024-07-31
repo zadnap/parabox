@@ -1,0 +1,60 @@
+{% macro postModal(post) %}
+    <div class="modal post-modal hidden" id="post-modal">
+        <article class="container post">
+            <div class="head">
+                <div class="info">
+                    <a href="/profile/{{ post.username }}">
+                        <img 
+                            class="avatar"
+                            src="data:image/jpeg;base64,{{ post.profile_picture }}" 
+                            alt="{{ post.first_name }} {{ post.last_name }}"
+                            onerror="this.src='../../static/images/avatar_placeholder.jpg';"
+                        >
+                    </a>
+                    <div class="names">
+                        <h3 class="poppins-semibold">{{ post.first_name }} {{ post.last_name }}'s post</h3>
+                        <p class="poppins-medium">@{{ post.username }}</p>
+                    </div>
+                </div>
+                <button id="close-post-modal" type="reset"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="body">
+                <div class="content">
+                    {% if post.caption %}
+                        <p class="caption">{{post.caption}}</p>
+                    {% endif %}
+                    {% if post.media_count != 0 %}
+                        <div class="pictures">
+                            <button class="prev" onclick="slide(-1, `{{ post.id }}`)"><i class="fa-solid fa-angle-left"></i></button>
+                            <ul class="slider">
+                                {% for file in post.media_blobs %}
+                                    <li class="item{% if loop.index0 == 0 %} focused{% endif %}" onclick="slide(0,`{{ post.id }}`,`{{ loop.index0 }}`)">
+                                        <img 
+                                            src="data:image/jpeg;base64,{{ file }}" 
+                                            alt="Post's image"
+                                            onerror="this.src='../static/images/avatar_placeholder.jpg';"
+                                        >
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                            <button class="next" onclick="slide(1, `{{ post.id }}`)"><i class="fa-solid fa-angle-right"></i></button>
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="interactions">
+                    <button class="poppins-medium">
+                        <i class="fa-regular fa-heart"></i><i class="fa-solid fa-heart"></i>{{ post.likes|length }}
+                    </button>
+                    <button class="poppins-medium comment" onclick="openPostModal()">
+                        <i class="fa-regular fa-comment"></i>{{ post.comments|length }}
+                    </button>
+                    <button class="poppins-medium bookmark marked">
+                        <i class="fa-regular fa-bookmark"></i>
+                        <i class="fa-solid fa-bookmark"></i>
+                    </button>
+                </div>
+                
+            </div>
+        </article>
+    </div>
+{% endmacro %}

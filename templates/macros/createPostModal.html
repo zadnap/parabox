@@ -1,0 +1,48 @@
+{% macro createPostModal() %}
+    <div class="modal create-modal hidden">
+        <form id="posting" action="/posting" method="post" class="container">
+            <div class="head">
+                <div class="info">
+                    <img 
+                        class="avatar"
+                        src="data:image/jpeg;base64,{{ current_user.profile_picture }}" 
+                        alt="{{ current_user.first_name }} {{ current_user.last_name }}"
+                        onerror="this.src='../static/images/avatar_placeholder.jpg';"
+                    >
+                    <div class="names">
+                        <h3 class="poppins-semibold">{{ current_user.first_name }} {{ current_user.last_name }}</h3>
+                        <p class="poppins-medium">@{{ current_user.username }}</p>
+                    </div>
+                </div>
+                <button id="close" type="reset"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="body">
+                <div class="text">
+                    <textarea
+                        id="post_edit"
+                        name="post_edit"
+                        maxlength="2500"
+                        spellcheck="false"
+                        placeholder="What's on your mind?"
+                        rows="1"
+                    ></textarea>
+                    <p id="word-count" class="count poppins-medium"></p>
+                </div>
+                <div class="images"></div>
+                <div class="posting-prompt"></div>
+                <div class="handles">
+                    <label class="poppins-medium">
+                        <input type="file" id="post_image" name="files" accept="image/png, image/jpeg" multiple>
+                        <i class="fa-regular fa-image"></i> Pictures
+                    </label>
+                    <button type="button" class="poppins-medium" id="add_hashtag">
+                        <i class="fa-solid fa-hashtag"></i> Hashtag
+                    </button>
+                </div>
+                <button id="share" class="poppins-semibold share" type="submit">
+                    Share
+                </button>
+            </div>
+        </form>
+    </div>
+{% endmacro %}

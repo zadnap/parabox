@@ -1,0 +1,99 @@
+{% macro post(data) %}
+    <article class="post" id="{{ data.id }}">
+        <div class="head">
+            <div class="info">
+                <a href="/profile/{{ data.username }}">
+                    <img 
+                        class="avatar"
+                        src="data:image/jpeg;base64,{{ data.profile_picture }}" 
+                        alt="{{ data.first_name }} {{ data.last_name }}"
+                        onerror="this.src='../static/images/avatar_placeholder.jpg';"
+                    >
+                </a>
+                <div class="names">
+                    <a href="/profile/{{data.username}}" class="poppins-semibold">{{data.first_name}} {{data.last_name}}</a>
+                    <p class="poppins-medium">{{ data.created_at }}</p>
+                </div>
+            </div>
+            {% if data.username == current_user.username %}
+                <div class="handles">
+                    <div class="dropdown">
+                        <button class="handle-post" onclick="openHandlePost(`{{ data.id }}`)">
+                            <i class="fa-solid fa-ellipsis-vertical"></i>
+                        </button>
+                        <div class="dropdown-content">
+                            <button onclick="deletePost(`{{ data.id }}`)">Delete post</button>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+        <div class="content">
+            {% if data.caption %}
+                <p class="caption">{{data.caption}}</p>
+            {% endif %}
+            {% if data.media_count != 0 %}
+                <div class="pictures">
+                    <button class="prev" onclick="slide(-1, `{{ data.id }}`)"><i class="fa-solid fa-angle-left"></i></button>
+                    <ul class="slider">
+                        {% for file in data.media_blobs %}
+                            <li class="item{% if loop.index0 == 0 %} focused{% endif %}" onclick="slide(0,`{{ data.id }}`,`{{ loop.index0 }}`)">
+                                <img 
+                                    src="data:image/jpeg;base64,{{ file }}" 
+                                    alt="{{ data.first_name }} {{ data.last_name }}"
+                                    onerror="this.src='../static/images/avatar_placeholder.jpg';"
+                                >
+                            </li>
+                        {% endfor %}
+                    </ul>
+                    <button class="next" onclick="slide(1, `{{ data.id }}`)"><i class="fa-solid fa-angle-right"></i></button>
+                </div>
+            {% endif %}
+        </div>
+        <div class="interactions">
+            <div>
+                <button class="poppins-medium like {% if data.is_liked %}liked{% endif %}" onclick="handleLikePost(`{{ data.id }}`)">
+                    <i class="fa-regular fa-heart"></i><i class="fa-solid fa-heart"></i><span>{{ data.likes|length }}</span>
+                </button>
+                <button class="poppins-medium comment" onclick="openCommentSection(`{{ data.id }}`)">
+                    <i class="fa-regular fa-comment"></i><span>{{ data.comments|length }}</span>
+                </button>
+            </div>
+            <div>
+                <button class="poppins-medium mark {% if data.is_marked %}marked{% endif %}" onclick="markPost(`{{ data.id }}`)">
+                    <i class="fa-regular fa-bookmark"></i>
+                    <i class="fa-solid fa-bookmark"></i>
+                </button>
+            </div>
+        </div>
+        <div class="comment-section hidden">
+            <div class="comments">
+                {% for comment in data.comments %}
+                    <div class="user-comment">
+                        <a href="/profile/{{ comment.username }}">
+                            <img 
+                                class="avatar"
+                                src="data:image/jpeg;base64,{{ comment.profile_picture }}" 
+                                alt="{{ comment.first_name }} {{ comment.last_name }}"
+                                onerror="this.src='../../static/images/avatar_placeholder.jpg';"
+                            >
+                        </a>
+                        <div class="info">
+                            <a href="/profile/{{ comment.username }}" class="poppins-medium name">{{ comment.first_name }} {{ comment.last_name }}</a>
+                            <p class="text">{{ comment.content }}</p>
+                            <span class="time">{{ comment.created_at }}</span>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="cmt-box">
+                <textarea class="comment-textarea" rows="1" placeholder="Say something less than 2000 characters" maxlength="2000" oninput="editComment(`{{ data.id }}`)"></textarea>
+                <div class="prompt"></div>
+                <div class="handles">
+                    <div class="word-count">0/2000</div>
+                    <button disabled class="cmt-btn" onclick="sendComment(`{{ data.id }}`)">Send</button>
+                </div>
+            </div>
+        </div>
+    </article>
+{% endmacro %}

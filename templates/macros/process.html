@@ -1,0 +1,30 @@
+{% macro process(mode) %}
+    <section class="process">
+        <div class="content">
+            {% if mode == 'register' %}
+                <div class="item done">
+                    <i class="fa-regular fa-user"></i>
+                    <div class="info">
+                        <h3 class="poppins-semibold">Your detail</h3>
+                        <p>Provide Information</p>
+                    </div>
+                </div>
+            {% elif mode == 'login' %}
+                <div class="item done">
+                    <i class="fa-regular fa-user"></i>
+                    <div class="info">
+                        <h3 class="poppins-semibold">Log In</h3>
+                        <p>Enter Your Credentials</p>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+        <div class="nav">
+            {% if mode == 'register' %}
+                <a href="/login">Login</a>
+            {% elif mode == 'login' %}
+                <a href="/register">Register</a>
+            {% endif %}
+        </div>
+    </section>
+{% endmacro %}

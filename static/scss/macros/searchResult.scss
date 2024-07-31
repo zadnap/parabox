@@ -1,0 +1,52 @@
+.not-found {
+    background-color: $background-color-2;
+    padding: 10px;
+    border-radius: 5px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-wrap: nowrap;
+}
+
+.search-result {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: $background-color-2;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    padding: 10px 15px;
+    .info {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        width: 30%;
+        .names {
+            overflow: hidden;
+            h3, p {
+                overflow: hidden;
+                text-overflow: ellipsis;
+                text-wrap: nowrap;
+            }
+            p {
+                color: $sub-text-color;
+                font-size: 0.8rem;
+            }
+        }
+    }
+    .wallpaper {
+        object-fit: cover;
+        width: 40%;
+        height: 50px;
+        margin: -10px 10px;
+        border-radius: 5px;
+    }
+    .handles{
+        a {
+            font-size: 0.8rem;
+        }
+        a:hover {
+            color: $primary-color;
+            text-decoration: underline;
+        }
+    }
+}

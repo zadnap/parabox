@@ -1,0 +1,38 @@
+{% from "macros/nav.html" import navBar with context %}
+{% from "macros/userGeneral.html" import userGeneral with context %}
+{% from "macros/post.html" import post with context %}
+{% from "macros/createPost.html" import createPost with context %}
+{% from "macros/createPostModal.html" import createPostModal with context %}
+{% from "macros/searchResults.html" import searchResults with context %}
+{% from "macros/post.html" import post with context %}
+
+{% extends "layout.html" %} 
+{% block title %}{{ query or "Home" }}{% endblock %} 
+
+{% block body %}
+  <div class="wrapper-main">
+    <nav>
+      {{ userGeneral() }}
+      {{ navBar() }}
+    </nav>
+    <div class="news">
+      {% if query %}
+        {{ searchResults(search_results) }}
+      {% else %}
+        {% if is_allow_creating %}
+          {{ createPost() }}
+        {% endif %}
+        {% for data in posts %}
+          {{ post(data) }}
+        {% endfor %}
+      {% endif %}
+    </div>
+    {{ createPostModal() }}
+  </div>
+{% endblock %} 
+
+{% block script %}
+  {% if not query %}
+    <script src="../../static/js/home/index.js"></script>
+  {% endif %}  
+{% endblock %}

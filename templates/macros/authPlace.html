@@ -1,0 +1,63 @@
+{% macro authPlace(mode) %}
+    <section class="auth">
+        <form action="/{{ mode }}" method="post" id="{{ mode }}-form">
+            <h3 class="poppins-semibold">
+                {% if mode == 'register' %} 
+                    Create a free account
+                {% elif mode == 'login' %}
+                    Welcome back to Parabox
+                {% endif %}
+            </h3>
+            <p class="poppins-medium">
+                {% if mode == 'register' %} 
+                    Provide an username and password
+                {% elif mode == 'login' %}
+                    Log in to explore your world
+                {% endif %}
+            </p>
+            {% if mode == 'register' %} 
+                <label class="poppins-semibold label" for="firstName">First Name</label>
+                <div class="input-box">
+                    <label for="firstName"><i class="fa-solid fa-circle-user"></i></label>
+                    <input autocomplete="off" spellcheck="false" name="firstName" id="firstName" type="text" placeholder="What is your first name?">
+                </div>
+                <label class="poppins-semibold label" for="lastName">Last Name</label>
+                <div class="input-box">
+                    <label for="lastName"><i class="fa-solid fa-circle-user"></i></label>
+                    <input autocomplete="off" spellcheck="false" name="lastName" id="lastName" type="text" placeholder="What is your last name?">
+                </div>
+                <label class="poppins-semibold label" for="username">Username</label>
+                <div class="input-box">
+                    <label for="username"><i class="fa-solid fa-circle-user"></i></label>
+                    <input autocomplete="off" spellcheck="false" name="username" id="username" type="text" placeholder="8-16 characters">
+                </div>
+                <label class="poppins-semibold label" for="password">Password</label>
+                <div class="input-box">
+                    <label for="password"><i class="fa-solid fa-key"></i></label>
+                    <input autocomplete="off" spellcheck="false" name="password" id="password" type="password" placeholder="More than 8 characters">
+                </div>
+                <label class="poppins-semibold label" for="password">Confirmation</label>
+                <div class="input-box">
+                    <label for="confirmation"><i class="fa-solid fa-key"></i></label>
+                    <input autocomplete="off" spellcheck="false" name="confirmation" id="confirmation" type="password" placeholder="More than 8 characters">
+                </div>
+            {% elif mode == 'login' %}
+                <label class="poppins-semibold label" for="username">Username</label>
+                <div class="input-box done">
+                    <label for="username"><i class="fa-solid fa-circle-user"></i></label>
+                    <input autocomplete="off" spellcheck="false" name="username" id="username" type="text" placeholder="Enter your username">
+                </div>
+                <label class="poppins-semibold label" for="password">Password</label>
+                <div class="input-box">
+                    <label for="password"><i class="fa-solid fa-key"></i></label>
+                    <input autocomplete="off" spellcheck="false" name="password" id="password" type="password" placeholder="Enter your password">
+                </div>
+                <div class="forgot">    
+                    <label for="remember_me"><input id="remember_me" type="checkbox" name="remember_me" checked> Remember me</label>
+                </div>
+            {% endif %}
+            <div id="prompt"></div>
+            <button class="poppins-semibold submit" type="submit">Continue</button>
+        </form>
+    </section>
+{% endmacro %}

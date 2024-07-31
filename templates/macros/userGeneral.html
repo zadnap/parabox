@@ -1,0 +1,16 @@
+{% macro userGeneral() %}
+    <div class="user">
+        <div class="info">
+            <img 
+                class="avatar"
+                src="data:image/jpeg;base64,{{ current_user.profile_picture }}" 
+                alt="{{ current_user.first_name }} {{ current_user.last_name }}"
+                onerror="this.src='../static/images/avatar_placeholder.jpg';"
+            >
+            <div class="names">
+                <h3 class="poppins-semibold">{{current_user.first_name}} {{current_user.last_name}}</h3>
+                <p>@{{ current_user.username }}</p>
+            </div>
+        </div>
+    </div>
+{% endmacro %}

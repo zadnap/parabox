@@ -1,0 +1,33 @@
+{% macro searchResults(search_results) %}
+    {% if search_results|length == 0 %}
+        <div class="not-found">There is no user named "{{ query }}"</div>
+    {% else %}
+        {% for result in search_results %}  
+            <div class="search-result">
+                <div class="info">
+                    <img 
+                        class="avatar" 
+                        src="data:image/jpeg;base64,{{ result.profile_picture }}" 
+                        onerror="this.src='../static/images/avatar_placeholder.jpg';"
+                        alt="{{ result.first_name }} {{ result.last_name}}"
+                        id="avatar-preview"
+                    >
+                    <div class="names">
+                        <h3 class="poppins-medium">{{ result.first_name }} {{ result.last_name }}</h3>
+                        <p>{{ result.username }}</p>
+                    </div>
+                </div>
+                <img 
+                    class="wallpaper" 
+                    src="data:image/jpeg;base64,{{ result.wallpaper_picture }}" 
+                    onerror="this.src='../static/images/avatar_placeholder.jpg';"
+                    alt="{{ result.first_name }} {{ result.last_name}}"
+                    id="avatar-preview"
+                >
+                <div class="handles">
+                    <a href="/profile/{{ result.username }}">View profile</a>
+                </div>
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endmacro %}
