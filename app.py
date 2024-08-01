@@ -84,6 +84,8 @@ def generate_post():
         post = Post(row, current_user.id)
         posts.append(post.to_dict())
 
+    print(posts)
+
     return jsonify({'posts': posts, 'username': current_user.username})
 
 

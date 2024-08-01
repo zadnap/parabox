@@ -46,7 +46,6 @@ const slide = (goto, id, index) => {
   } else if (goto == 0) {
     currentIndex = index;
   }
-  console.log(sliderItems[currentIndex]);
 
   sliderItems[currentIndex].scrollIntoView({
     block: "center",

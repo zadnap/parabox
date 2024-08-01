@@ -3,7 +3,7 @@ const renderMedia = (media, postId) => {
   const slider = document.createElement("ul");
   slider.classList.add("slider");
 
-  media.forEach(file, (index) => {
+  media.forEach((file, index) => {
     const mediaItem = document.createElement("li");
     mediaItem.classList.add("item");
     mediaItem.setAttribute("onclick", `slide(0,${postId},${index})`);
@@ -88,7 +88,9 @@ const renderPost = (post, username) => {
           <button class="prev" onclick="slide(-1, ${post.id})">
             <i class="fa-solid fa-angle-left"></i>
           </button>
-          ${renderMedia(post.media_blobs, post.id)}
+          <ul class="slider">
+            ${renderMedia(post.media_blobs, post.id)}
+          </ul>
           <button class="next" onclick="slide(1, ${post.id})">
             <i class="fa-solid fa-angle-right"></i>
           </button>
@@ -148,8 +150,6 @@ const fetchMorePosts = async () => {
   try {
     const response = await fetch(`/generate_post/?page=${currentPage}`);
     const data = await response.json();
-
-    console.log(data);
 
     if (data.posts.length == 0) {
       const prompt = document.createElement("div");
