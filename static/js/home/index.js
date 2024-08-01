@@ -148,7 +148,7 @@ let currentPage = 2;
 
 const fetchMorePosts = async () => {
   try {
-    const response = await fetch(`/generate_post/?page=${currentPage}`);
+    const response = await fetch(`/generate_post?page=${currentPage}`);
     const data = await response.json();
 
     if (data.posts.length == 0) {

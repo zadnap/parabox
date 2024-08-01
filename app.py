@@ -70,7 +70,7 @@ def marked():
     return render_template('home/index.html', posts=posts, is_allow_creating=False)
 
 
-@app.route('/generate_post/')
+@app.route('/generate_post')
 @login_required
 def generate_post():
     page = request.args.get('page', default=1,type=int)
