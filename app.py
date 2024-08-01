@@ -70,24 +70,6 @@ def marked():
     return render_template('home/index.html', posts=posts, is_allow_creating=False)
 
 
-@app.route('/generate_post')
-@login_required
-def generate_post():
-    page = request.args.get('page', default=1,type=int)
-    per_page = 5
-    start_idx = (page - 1) * per_page
-    end_idx = start_idx + per_page
-
-    post_id_list = [d['id'] for d in query_into_dict("SELECT posts.id FROM posts ORDER BY posts.created_at DESC LIMIT ?", (page * per_page,))]
-    posts = []
-    for row in post_id_list[start_idx:end_idx]:
-        post = Post(row, current_user.id)
-        posts.append(post.to_dict())
-
-    return jsonify({'posts': posts, 'username': current_user.username})
-
-
-
 @app.route('/register', methods=["GET", "POST"])
 def register():
     if request.method == "GET":
