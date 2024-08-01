@@ -306,7 +306,7 @@ def posting():
 def like_post():
     id = request.form.get('id')
     
-    current_like = query_into_dict("SELECT * FROM likes WHERE post_id = ?", (id,))
+    current_like = query_into_dict("SELECT * FROM likes WHERE post_id = ? AND user_id = ?", (id, current_user.id))
 
     if len(current_like) == 0:
         db.cursor.execute("INSERT INTO likes (post_id, user_id) VALUES (?,?)", (id, current_user.id))
@@ -324,7 +324,7 @@ def like_post():
         WHERE 
             posts.id = ?
     ''', (id,))
-
+    
     return jsonify({'message': 'Liked Successful!', 'like_count' : len(likes)})
 
 @app.route("/post/comment", methods=["POST"])

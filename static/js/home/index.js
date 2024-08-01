@@ -196,9 +196,9 @@ const countWord = () => {
 };
 
 // Handle expand post creating textarea
+const heightLimit = 250;
 
 postEdit.addEventListener("input", () => {
-  const heightLimit = 250;
   postEdit.style.height = ""; // Reset the height
   postEdit.style.height = Math.min(postEdit.scrollHeight, heightLimit) + "px";
   countWord();
@@ -213,6 +213,8 @@ addHashtagBtn.addEventListener("click", () => {
   } else if (postEdit.value.length < 2499) {
     postEdit.value += "\n#";
   }
+  postEdit.style.height = ""; // Reset the height
+  postEdit.style.height = Math.min(postEdit.scrollHeight, heightLimit) + "px";
   postEdit.focus();
   countWord();
 });

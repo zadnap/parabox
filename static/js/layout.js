@@ -11,10 +11,12 @@ const closeOtherDropdowns = (currentDropdown) => {
 const profileBtn = document.querySelector("#profile");
 const dropdownProfile = document.querySelector("#profile-dropdown");
 
-profileBtn.onclick = () => {
-  closeOtherDropdowns(dropdownProfile);
-  dropdownProfile.classList.toggle("show");
-};
+if (profileBtn) {
+  profileBtn.onclick = () => {
+    closeOtherDropdowns(dropdownProfile);
+    dropdownProfile.classList.toggle("show");
+  };
+}
 
 // Handle scrolling post image into view
 const slide = (goto, id, index) => {
