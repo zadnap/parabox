@@ -36,7 +36,7 @@ def unauthorized():
 @app.route('/')
 @login_required
 def index():
-    post_id_list = [d['id'] for d in query_into_dict("SELECT posts.id FROM posts ORDER BY posts.created_at DESC")]
+    post_id_list = [d['id'] for d in query_into_dict("SELECT posts.id FROM posts ORDER BY posts.created_at DESC LIMIT 5")]
     posts = []
     for row in post_id_list:
         post = Post(row, current_user.id)
@@ -235,7 +235,10 @@ def search():
     query = request.args.get("q")
     
     if query:
-        search_results = query_into_dict("SELECT * FROM users WHERE username LIKE '%" + query + "%'" + "ORDER BY first_name LIMIT 7")
+        condition = "first_name LIKE '%" + query + "%'" + " OR " + "last_name LIKE '%" + query + "%'"  + " OR " + "username LIKE '%" + query + "%'"
+        search_results = query_into_dict("SELECT * FROM users WHERE " + condition + " ORDER BY first_name")
+
+        print
 
         # Parse the BLOB into JSON 
         for result in search_results:
